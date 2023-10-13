@@ -1,5 +1,6 @@
 package com.yse.dev.book.controller;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yse.dev.book.dto.BookCreateDTO;
 import com.yse.dev.book.dto.BookEditDTO;
 import com.yse.dev.book.dto.BookEditResponseDTO;
+import com.yse.dev.book.dto.BookListResponseDTO;
 import com.yse.dev.book.dto.BookReadResponseDTO;
 import com.yse.dev.book.service.BookService;
 
@@ -53,10 +55,6 @@ public class BookController {
 	    mav.setViewName("common/error/422");  
 	    return mav;  
 	}  
-
-	
-	
-	
 
 	@GetMapping("/book/create")
 	public String create() {
@@ -124,7 +122,16 @@ public class BookController {
 	    return "redirect:/book/list";  
 	}  
 
-	
+	// 책 목록 메소드 
+	// 모든 로직이 서비스에서 처리되기 떄문에 모델 경로 지정, 서비스 호출 후 뷰 반환
+	@GetMapping(value = {"/book/list","/book"})
+	public ModelAndView bookList(String title, Integer page, ModelAndView mav) {
+		mav.setViewName("/book/list");
+		
+		List<BookListResponseDTO> books = this.bookService.bookList(title, page);
+		mav.addObject("books",books);
+		return mav;
+	}
 	
 	
 	

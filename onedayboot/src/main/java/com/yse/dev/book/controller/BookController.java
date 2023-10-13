@@ -110,6 +110,8 @@ public class BookController {
 		}
 		this.bookService.update(bookEditDTO);
 		
+		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(String.format("redirect:/book/read/%s", bookEditDTO.getBookId()));		
 		return mav;

@@ -18,7 +18,8 @@ public class BookEditResponseDTO {
 	 private String title;  
 	 private Integer price;  
 	 private LocalDateTime insertDateTime;  
-
+	 
+	 // Book 엔티티 객체에서 정보를 추출하여 BookEditResponseDTO 객체에 할당하는 역할	 
 	 public BookEditResponseDTO fromBook(Book book) {  
 	 this.bookId = book.getBookId();  
 	 this.title = book.getTitle();  
@@ -26,7 +27,9 @@ public class BookEditResponseDTO {
 	 this.insertDateTime = book.getInsertDateTime();  
 	 return this;  
 	 }  
-
+	 
+	 // 이 메소드는 Book 엔티티 정보로 초기화된 BookEditResponseDTO 객체를 생성하는 정적 팩토리 메소드
+	 // 이를 통해 BookEditResponseDTO 객체를 간단하게 생성하고 초기화
 	 public static BookEditResponseDTO BookFactory(Book book) {  
 	 BookEditResponseDTO bookEditResponseDTO = new BookEditResponseDTO();  
 	 bookEditResponseDTO.fromBook(book);  

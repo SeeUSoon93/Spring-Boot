@@ -1,22 +1,84 @@
-<html xmlns:th="http://www.thymeleaf.org">  
-  <head>  
-  <title>책 상세</title>  
-  </head>  
-  <body>  
-        <h1>책 상세</h1>  
-        <p><label>제목</label> : <span th:text="${bookReadResponseDTO.title}"></span>  
-        <p><label>가격</label> : <span th:text="${#numbers.formatInteger(bookReadResponseDTO.price, 3, 'COMMA')}"></span>  
-        <p><label>입력일</label> : <span th:text="${#temporals.format(bookReadResponseDTO.insertDateTime, 'yyyy-MM-dd HH:mm')}"></span>  
-        <p>  
-            <a th:href="@{/book/edit/{id}(id=${bookReadResponseDTO.bookId})}" th:text="수정"></a>           
-        </p>  
-        <!--  -->
-			<form method="POST" th:action="@{/book/delete}" th:object="${bookReadResponseDTO}">  
-			    <input type="hidden" th:name="bookId" th:value="*{bookId}" />  
-			    <input type="submit" value="삭제" />  
-			</form>  
-        <p>  
-            <a th:href="@{/book/list}" th:text="목록으로"></a>  
-        </p>  
-  </body>  
-</html>  
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>책 상세</title>
+  </head>
+  <body>
+    <h1>책 상세</h1>
+    <p>
+      <label>제목</label> : <span th:text="${bookReadResponseDTO.title}"></span>
+    </p>
+    <p>
+      <label>가격</label> : <span th:text="${#numbers.formatInteger(bookReadResponseDTO.price, 3, 'COMMA')}"></span>
+    </p>
+    <p>
+      <label>입력일</label> : <span th:text="${#temporals.format(bookReadResponseDTO.insertDateTime, 'yyyy-MM-dd HH:mm')}"></span>
+    </p>
+    <p>
+      <a th:href="@{/book/edit/{id}(id=${bookReadResponseDTO.bookId})}" th:text="수정"></a>
+    </p>
+    <!-- 책 수정 및 삭제 기능 -->
+
+    <form method="POST" th:action="@{/book/delete}" th:object="${bookReadResponseDTO}">
+      <input type="hidden" th:name="bookId" th:value="*{bookId}" />
+      <input type="submit" value="삭제" />
+    </form>
+    <p>
+      <a th:href="@{/book/list}" th:text="목록으로"></a>
+    </p>
+    <!-- 책 목록으로 이동하는 링크 -->
+
+    <!-- 신규 추가된 코드 시작 -->
+    <div id="book_log">
+    </div>
+    <!-- 책 로그 출력을 위한 div 요소 -->
+
+    <p>
+      <input type="text" id="book_log_comment" />
+      <!-- 로그 코멘트 입력 필드 -->
+      <input type="text" id="book_log_page" placeholder="페이지" />
+      <!-- 로그 페이지 입력 필드 -->
+      <input type="button" id="book_log_save" value="책 기록 저장" th:attr="data-bookId=${bookReadResponseDTO.bookId}" />
+      <!-- 책 로그 저장 버튼 -->
+    </p>
+    <!-- 로그 입력 관련 요소 -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- jQuery 라이브러리 불러오기 -->
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#book_log_save").click(function(){
+          var book_log_comment = $("#book_log_comment").val();
+          // 로그 코멘트 입력 필드에서 값을 가져옴
+
+          var post_data = {
+            bookId : $("#book_log_save").attr("data-bookId"),
+            // 책 ID 가져오기
+            comment : $("#book_log_comment").val(),
+            // 코멘트 가져오기
+            page : $("#book_log_page").val() != "" ? $("#book_log_page").val() : null
+            // 페이지 값 가져오기 (입력되지 않은 경우 null)
+          };
+
+          $.ajax({
+            type: "POST",
+            url : "/book-log/create",
+            // 로그 저장을 처리할 엔드포인트 URL
+            data : JSON.stringify(post_data),
+            // POST 데이터를 JSON 문자열로 변환
+            success : function(data){
+              var append_html = "<p>" + (data.page == null ? "" : "(p." + data.page + ".) ") + data.comment + "</p>";
+              // 로그 출력을 위한 HTML 생성
+              $("#book_log").append(append_html);
+              // 로그를 출력할 div에 추가
+            },
+            dataType : "json",
+            contentType : "application/json"
+          });
+        });
+      });
+    </script>
+    <!-- 신규 추가된 코드 끝 -->
+
+  </body>
+</html>

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity // Entity 어노테이션을 적용해야 JPA가 엔티티로 인식
-public class Question {
+public class Question{
 	
 	// 프라이머리 키 설정
 	@Id

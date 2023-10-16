@@ -33,7 +33,10 @@ dependencies {
     // thymeleaf를 사용하기 위함
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-    
+    // 화면에서 전달받은 입력 값을 검증하려면 Spring Boot Validation 라이브러리가 필요
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // @Size:문자길이제한 / @NotNull / @NotEmpty:null,빈문자열 허용X /@Past :과거날짜만/@Future:미래날짜만/@FutureOrPresent:미래또는 오늘날짜만 가능
+    // @Max:최대값 / @Min:최소값 / @Pattern:정규식으로 검증
 }
 
 tasks.named('test') {

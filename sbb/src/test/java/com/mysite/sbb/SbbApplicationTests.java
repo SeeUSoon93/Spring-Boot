@@ -15,6 +15,7 @@ import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 
 import jakarta.transaction.Transactional;
 
@@ -23,17 +24,28 @@ import jakarta.transaction.Transactional;
 class SbbApplicationTests {
 	
 	// 스프링의 DI 기능으로 questionRepository 객체를 스프링이 자동으로 생성
-	@Autowired
-	private QuestionRepository questionRepository;
-	
-	@Autowired
-	private AnswerRepository answerRepository;
-	
-	@Transactional //아래의 조회 후 DB세션이 끊겨 발생하는 에러를 막기 위함 - 메서드가 종료될 때까지 세션이 유지됨
-	@Test
-	void testJpa() {
+    @Autowired
+    private QuestionService questionService;
+
+    @Test
+    void testJpa() {
+        for (int i = 1; i <= 300; i++) {
+            String subject = String.format("테스트 데이터입니다:[%03d]", i);
+            String content = "내용무";
+            this.questionService.create(subject, content);
+        }
+    }
+}
+		
+		
+		
+		
+		
 		//데이터 넣는 테스트
-//		Question q1 = new Question(); q1.setSubject("sbb가 뭐냐?");
+	//Question q1 = new Question(); q1.setSubject("sbb가 뭐냐?");
+		
+	
+	
 //		q1.setContent("sbb가 뭔데 씹덕아"); q1.setCreateDate(LocalDateTime.now());
 //		this.questionRepository.save(q1);
 //		 
@@ -112,9 +124,5 @@ class SbbApplicationTests {
 		
         
         
-        
-        
 		
-	}
 	// 테스트할 떄는 로컬서버를 중지하고 테스트해야함
-}

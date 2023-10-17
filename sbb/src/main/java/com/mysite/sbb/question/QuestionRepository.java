@@ -1,5 +1,9 @@
 package com.mysite.sbb.question;
 
+import java.awt.print.Pageable;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // 리포지터리 - 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들을 사용하기 위한 인터페이스
@@ -10,8 +14,14 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 
 	// finBySubject와 같은 메서드는 기본 제공이 되지 않기 떄문에 인터페이스에 적어줘야함
 	Question findBySubject(String subject);
-	
 	Question findBySubjectAndContent(String subject, String content);
+	List<Question> findBySubjectLike(String sibject);
+	// page
+	Page<Question> findAll(Pageable pageable);
+	
+	
+	
+	
 }
 
 

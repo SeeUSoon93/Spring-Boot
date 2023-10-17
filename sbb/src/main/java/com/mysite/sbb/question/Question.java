@@ -37,9 +37,10 @@ public class Question{
 	// 카멜케이스 이름은 _로 단어가 구분되어 실제 테이블 컬럼명이 생성됨
 	private LocalDateTime createDate;
 
-	// 하나의 질문에 답변 여러개이기 때문에 여기서는 OneToMany를 사용하고 List형태
-	// mappedBy는 참조한 속성명.
-	// cascade는 질문 삭제 시 답변들도 함께 삭제시키기 위함
-	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-	private List<Answer> answerList;
+	
+	 // 하나의 질문에 답변 여러개이기 때문에 여기서는 OneToMany를 사용하고 List형태 // mappedBy는 참조한 속성명. //
+	 // cascade는 질문 삭제 시 답변들도 함께 삭제시키기 위함	 
+	 @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) private
+	 List<Answer> answerList;
+
 }

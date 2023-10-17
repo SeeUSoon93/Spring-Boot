@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<!-- Bootstrap CSS -->
+    <!-- static디렉터리가 스태틱 파일들의 루트 디렉터리이기 때문에 /static/style.css가 아님 -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <!-- sbb CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 th:text="${board.boardTitle}">제목</h1>
+	<div th:text="${board.boardCon}">내용</div>
+	
+	<!-- 댓글 표시 -->
+	<h5>댓글 : <span th:text="|${#lists.size(board.repleList)}|">개</span></h5>
+	<div>
+		<ul>
+			<li th:each="reple:${board.repleList}" th:text="${reple.repleCon}"></li>
+		</ul>		
+	</div>
+	
+	<!-- 댓글 다는 폼-->
+	<form th:action="@{|/reple/create/${board.boardNum}|}" method="post">
+		<textarea name="repleCon" id="repleCon" rows="15"></textarea>
+		<input type="submit" value="등록">
+	</form>
+</body>
+</html>

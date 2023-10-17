@@ -12,7 +12,7 @@
 		    <tbody>
 				<!-- foreach문과 같음-->
 				<!-- loop.count를 이용해 번호 삽입-->
-		        <tr th:each="question,loop : ${questionList}">
+		        <tr th:each="question,loop : ${paging}">
 					<td th:text="${loop.count}"></td>
 		            <td>
 	               	 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>

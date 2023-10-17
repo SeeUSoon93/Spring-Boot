@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mysite.sbb.DataNotFoundException;
@@ -16,10 +19,17 @@ public class QuestionService {
 	
 	private final QuestionRepository questionRepository;
 	
-	// 전체 목록 조회
-	public List<Question> getList(){
-		return this.questionRepository.findAll();
+//	// 전체 목록 조회
+//	public List<Question> getList(){
+//		return this.questionRepository.findAll();
+	
+	// 전체 목록 페이징
+	public Page<Question> getList(int page){
+		// page는 조회할 페이지의 번호, 10은 한 페이지에 보여줄 게시물의 갯수
+		Pageable pageable = PageRequest.of(page, 10);
+		return this.questionRepository.findAll(pageable);
 	}
+	
 	
 	// 게시글 상세 조회
 	public Question getQuestion(Integer id) {

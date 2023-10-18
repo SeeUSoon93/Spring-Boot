@@ -1,9 +1,9 @@
 package com.mysite.sbb.question;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // 리포지터리 - 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들을 사용하기 위한 인터페이스

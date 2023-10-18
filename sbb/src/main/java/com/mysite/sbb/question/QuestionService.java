@@ -1,12 +1,14 @@
 package com.mysite.sbb.question;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.mysite.sbb.DataNotFoundException;
@@ -25,8 +27,12 @@ public class QuestionService {
 	
 	// 전체 목록 페이징
 	public Page<Question> getList(int page){
+		// 최근에 작성한 게시글이 가장먼저 보이게
+		List<Sort.Order> sorts = new ArrayList<>();
+		sorts.add(Sort.Order.desc("createDate"));
+		
 		// page는 조회할 페이지의 번호, 10은 한 페이지에 보여줄 게시물의 갯수
-		Pageable pageable = PageRequest.of(page, 10);
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 		return this.questionRepository.findAll(pageable);
 	}
 	

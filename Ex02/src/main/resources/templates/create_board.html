@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- th:action - 기존 form태그의 action속성과 같음-->
+	<form th:action="@{/detail/create}" method="post">
+		<input type="text" name="boardTitle" id="boardTitle">
+		<input type="text" name="boardCon" id="boardCon">
+		<input type="submit" value="댓글등록">		
+	</form>
+</body>
+</html>

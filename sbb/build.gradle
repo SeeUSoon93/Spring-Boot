@@ -37,6 +37,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     // @Size:문자길이제한 / @NotNull / @NotEmpty:null,빈문자열 허용X /@Past :과거날짜만/@Future:미래날짜만/@FutureOrPresent:미래또는 오늘날짜만 가능
     // @Max:최대값 / @Min:최소값 / @Pattern:정규식으로 검증
+    
+    // 스프링 시큐리티를 사용하기 위함
+    // 스프링 시큐리티 - 스프링 기반 애플리케이션의 인증과 권한을 담당하는 스프링의 하위 프레임워크
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
 }
 
 tasks.named('test') {

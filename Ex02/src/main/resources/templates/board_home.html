@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <!-- static디렉터리가 스태틱 파일들의 루트 디렉터리이기 때문에 /static/style.css가 아님 -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <!-- sbb CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <title>Hello, sbb!</title>
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성일시</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- th:~ - 타임리프 문법
-			each : 반복문
-			text : 해당 내용을 태그안에 출력
-			-->
-			<tr th:each="board,loop:${boardList}" >
-				<td th:text="${loop.count}"></td>
-				<td th:text="${board.boardTitle}"></td>
-				<td th:text="${board.boardDate}"></td>
-			</tr>			
-		</tbody>		
-	</table>
+	<div class="container mt-3">
+		<table class="table">
+			<thead class="table-dark">
+				<tr>
+					<th style="text-align: center;">번호</th>
+					<th style="text-align: center;">제목</th>
+					<th style="text-align: center;">작성일시</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- th:~ - 타임리프 문법
+				each : 반복문
+				text : 해당 내용을 태그안에 출력
+				-->
+				<tr th:each="board,loop:${boardList}" >
+					<td style="text-align: center;"  th:text="${loop.count}"></td>
+					<!-- || : 문자열과 ${}와 같은 객체의 값을 더할때 오류가 발생하지 않도록 막아줌-->
+					<td><a th:href="@{|/board/detail/${board.boardNum}|}" th:text="${board.boardTitle}"></a></td>
+					<td style="text-align: center;" th:text="${board.boardDate}"></td>
+				</tr>	
+				<a href="/board/create"></a>		
+			</tbody>		
+		</table>
+	</div>
 </body>
 </html>

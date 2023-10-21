@@ -16,9 +16,9 @@ public class Member {
 	private Integer memNum;
 
 	@Column(unique = true)
-	private String memId;
+	private String username;
 	
-	private String memPw;
+	private String password;
 	
 	@Column(unique = true)
 	private String memEmail;

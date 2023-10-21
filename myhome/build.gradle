@@ -42,6 +42,9 @@ dependencies {
     // 스프링 시큐리티 - 스프링 기반 애플리케이션의 인증과 권한을 담당하는 스프링의 하위 프레임워크
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
+    
+    // 마크다운 기능
+    implementation 'org.commonmark:commonmark:0.21.0'
 }
 
 tasks.named('test') {

@@ -2,7 +2,10 @@ package com.soon.myhome.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.soon.myhome.entity.Board;
 
@@ -14,4 +17,20 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
 	// page
 	Page<Board> findAll(Pageable pageable);
+	
+	Page<Board> findAll(Specification<Board> specification, Pageable pageable);
+	
+    @Query("select "
+            + "distinct b "
+            + "from Board b " 
+            + "left outer join Member m1 on b.member=m1 "
+            + "left outer join Reple r on r.board=b "
+            + "left outer join Member m2 on r.member=m2 "
+            + "where "
+            + "   b.boardTitle like %:kw% "
+            + "   or b.boardCon like %:kw% "
+            + "   or m1.username like %:kw% "
+            + "   or r.repleCon like %:kw% "
+            + "   or m2.username like %:kw% ")
+    Page<Board> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
 }

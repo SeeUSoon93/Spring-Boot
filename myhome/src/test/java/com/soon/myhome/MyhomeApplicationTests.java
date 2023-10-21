@@ -19,7 +19,7 @@ class MyhomeApplicationTests {
         for (int i = 1; i <= 300; i++) {
             String boardTitle = String.format("테스트 제목:[%03d]", i);
             String boardCon = "테스트 내용";
-            this.boardService.createBoard(boardTitle, boardCon);
+            this.boardService.createBoard(boardTitle, boardCon,null);
         }
     }
 

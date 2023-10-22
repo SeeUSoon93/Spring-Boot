@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2 th:text="${board.boardTitle}"></h2>
+	<h4 th:text="${board.boardCon}"></h4>
+	
+	<h5>댓글 : <span th:text="|${#lists.size(board.repleList)}|">개</span></h5>
+	<div>
+		<ul>
+			<li th:each="reple:${board.repleList}" th:text="${reple.repleCon}"></li>
+		</ul>
+	</div>
+	<!-- 댓글 다는 폼 -->
+	<form th:action="@{|/reple/create/${board.boardNum}|}" method="post">
+		<textarea name="repleCon" id="repleCon" rows="10" required></textarea>
+		<input type="submit" value="댓글달기" >		
+	</form>
+</body>
+</html>

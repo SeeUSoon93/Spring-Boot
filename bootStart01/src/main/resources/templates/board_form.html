@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- th:object="${boardForm}" - 이 form태그의 속성들은 boardForm의 속성들로 이루어졌다고 알려줌-->
+	<form th:action="@{/board/create}" method="post" th:object="${boardForm}">
+		<div th:if="${#fields.hasAnyErrors}">
+			<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
+		</div>
+		<!-- th:field - 해당 태그의 id,name,value 속성이 자동으로 생성
+					    타임리프가 value속성에 기존값을 채워넣음 -->
+		제목<input type="text" th:field="*{boardTitle}">
+		내용<textarea th:field="*{boardCon}"></textarea>
+		<input type="submit" value="게시글 등록">
+	</form>
+</body>
+</html>

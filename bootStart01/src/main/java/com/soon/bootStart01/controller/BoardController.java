@@ -44,18 +44,18 @@ public class BoardController {
 
 	// 게시글 작성 폼으로 이동
 	@GetMapping("/create")
-	public String boardCreate() {
+	public String boardCreate(BoardForm boardForm) {
 		return "board_form";
 	}
 	
 	@PostMapping("/create")
 	// @Valid - 지정한 Form에서 설정한 유효성 검사를 진행함(notEmpty, size...등)
 	// BindingResult - Form(클래스)에서 설정한 항목과 같은 폼(태그)이 전송되면 자동으로 같은 속성이 바인딩 됨
-	public String boardCreate(@Valid BoardForm boardform, BindingResult bindingResult) {
+	public String boardCreate(@Valid BoardForm boardForm, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "board_form";
 		}
-		this.boardService.boardCreate(boardform.getBoardTitle(),boardform.getBoardCon());
+		this.boardService.boardCreate(boardForm.getBoardTitle(),boardForm.getBoardCon());
 		return "redirect:/board/main";
 	}
 	

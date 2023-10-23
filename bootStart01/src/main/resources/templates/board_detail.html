@@ -15,8 +15,12 @@
 		</ul>
 	</div>
 	<!-- 댓글 다는 폼 -->
-	<form th:action="@{|/reple/create/${board.boardNum}|}" method="post">
-		<textarea name="repleCon" id="repleCon" rows="10" required></textarea>
+	<form th:action="@{|/reple/create/${board.boardNum}|}" th:object="${repleForm}" method="post">
+		<!-- 에러메시지 띄우기-->
+		<div th:if="${#fields.hasAnyErrors()}">
+			<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
+		</div>
+		<textarea th:field="*{repleCon}" rows="10"></textarea>
 		<input type="submit" value="댓글달기" >		
 	</form>
 </body>

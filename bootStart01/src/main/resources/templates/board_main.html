@@ -11,6 +11,7 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성일시</th>
+				<th>조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,6 +25,7 @@
 				<td th:text="${loop.count}"></td>
 				<td><a th:href="@{|/board/detail/${board.boardNum}|}"  th:text="${board.boardTitle}"></a></td>
 				<td th:text="${board.boardDate}"></td>
+				<td th:text="${board.boardView}"></td>
 			</tr>
 		</tbody>
 	</table>

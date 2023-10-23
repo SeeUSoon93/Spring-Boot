@@ -8,6 +8,7 @@ import com.soon.bootStart01.entity.Board;
 import com.soon.bootStart01.entity.Reple;
 import com.soon.bootStart01.repository.RepleRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class RepleService {
 	
 	private final RepleRepository repleRepository;
 	
+	@Transactional
 	public void repleCreate(Board board, String repleCon) {
 		Reple r = new Reple();
 		r.setRepleCon(repleCon);

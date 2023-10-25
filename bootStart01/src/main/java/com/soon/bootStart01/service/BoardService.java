@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.soon.bootStart01.DataNotFound;
 import com.soon.bootStart01.entity.Board;
+import com.soon.bootStart01.entity.Reple;
 import com.soon.bootStart01.repository.BoardRepository;
 
 import jakarta.transaction.Transactional;
@@ -63,14 +64,16 @@ public class BoardService {
 	}
 	
 	// 게시글 조회수 올리기
-	// insert/update 둘다 save를 사용함
-	// JpaRepository는 'EntityInformation' type의 entityInformation이라는 필드를 가지고 있다
-	// 이 필드는 entity의 메타데이터를 가지고 있는데 얘가 이 엔티티가 새롭게 생성된 엔티티인지를 판발
-	// 판별 후 기존에 있던 엔티티라면 update, 새로운 엔티티라면 insert가 실행된다.
-	// 자세한 내용은 스스로...
-	
-	// @Transactional - 해당 메서드내에서 실행되는 모든 데이터베이스 작업을 하나의 트랜잭션으로 관리
-	//					트랜잭션 내에서 예외가 발생하면 해당 메서드 실행 작업이 롤백! 데이터 관리에 용이
+	// insert / update는 어떻게 구분될까?
+	/* JpaRepository는 'EntityInformation'타입을 가진 'entityInformation'필드가 존재함
+	 * 이 필드는 entity의 meta데이터를 가지고 있음
+	 * 이걸 바탕으로 현재 들어오는 엔티티가 새롭게 생성된 엔티티인지, 기존에 있던 엔티티 인지 판단함
+	 * 새롭게 생성된 -> insert문 / 기존에 있던 -> update문
+	 * */
+	 
+	// @Transactional - 해당 메서드 내에서 실행되는 모든 DB작업을 하나의 트랜잭션으로 관리
+	// 					트랜잭션내에서 예외가 발생했을 때, 메서드 실행작업이 롤백된다!
+	//					-> DB관리에 용이
 	@Transactional
 	public void boardViewCount(Board board) {
 		board.setBoardView(board.getBoardView()+1);

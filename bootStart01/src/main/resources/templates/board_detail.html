@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+	<div layout:fragment="content" >
 	<h2 th:text="${board.boardTitle}"></h2>
 	<h4 th:text="${board.boardCon}"></h4>
 	
@@ -16,12 +11,12 @@
 	</div>
 	<!-- 댓글 다는 폼 -->
 	<form th:action="@{|/reple/create/${board.boardNum}|}" th:object="${repleForm}" method="post">
-		<!-- 에러메시지 띄우기-->
 		<div th:if="${#fields.hasAnyErrors()}">
 			<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
-		</div>
+		</div> 
 		<textarea th:field="*{repleCon}" rows="10"></textarea>
 		<input type="submit" value="댓글달기" >		
 	</form>
-</body>
+	<a th:href="@{/board/main}">목록</a>
+</div>
 </html>

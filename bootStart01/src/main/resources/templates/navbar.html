@@ -1,0 +1,18 @@
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-sm navbar-dark bg-dark" style="height: 70px;">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/main}">Soon</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/board/main}">게시판</a>
+        </li>
+      </ul>
+      <form class="d-flex">        
+        <button class="btn btn-primary" th:href="@{/member/login}" type="button">로그인</button>
+      </form>
+    </div>
+  </div>
+</nav>

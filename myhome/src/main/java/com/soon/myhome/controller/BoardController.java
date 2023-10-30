@@ -38,9 +38,10 @@ public class BoardController {
 	private final MemberService memberService;
 	
 	// 리스트 조회
-	@GetMapping("/list")
+	@GetMapping("/main")
 	public String boardHome(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "serchingWord", defaultValue = "") String serchingWord) {
+		System.out.println("검색단어 들어오냐?"+serchingWord);
 //		// findAll - 테이블의 모든 데이터를 조회
 //		List<Board> boardList = this.boardService.selectList();
 //		model.addAttribute(boardList);
@@ -48,7 +49,7 @@ public class BoardController {
        	Page<Board> paging = this.boardService.getList(page, serchingWord);
         model.addAttribute("paging", paging);
         model.addAttribute("serchingWord", serchingWord);
-        return "board_list";
+        return "board_main";
 	}
 
 	// 게시글 상세조회
@@ -79,7 +80,7 @@ public class BoardController {
 		}		
 		Member member = this.memberService.getMem(principal.getName());
 		this.boardService.createBoard(boardForm.getBoardTitle(), boardForm.getBoardCon(), member);
-		return "redirect:/board/list";
+		return "redirect:/board/main";
 	}
 	
     @PreAuthorize("isAuthenticated()")

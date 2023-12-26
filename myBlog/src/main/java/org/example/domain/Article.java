@@ -29,4 +29,8 @@ public class Article {
     }
     // title에 어떤 값이, content에 어떤 값이 들어가는지 명시적으로 작성
 
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }

@@ -38,7 +38,7 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.1' // XML 문서와 JAva 객체 간 매핑 자동화
     // oauth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-
+    implementation 'mysql:mysql-connector-java'
 }
 
 test {

@@ -1,13 +1,13 @@
 spring:
   jpa:
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
     defer-datasource-initialization: true
   h2:
     console:
-      enabled: true
+      enabled: false
   http:
     encoding:
       charset: UTF-8
@@ -18,11 +18,5 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
-            scope:
-              - email
-              - profile
 jwt:
   issuer: rlarnstns@gmail.com
-  secret_key: study-springboot
